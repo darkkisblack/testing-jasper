@@ -87,58 +87,80 @@
   </style>
 </head>
 <body>
-  <div class="diagram-container">
-    <div class="diagram-text">
-      <div class="diagram-value"></div>
-      <div class="diagram-unit">km/h</div>
-    </div>
-    <div class="diagram-label">Average speed</div>
-  </div>
-  <svg 
-    class="diagram-indicator" 
-    width="58" 
-    height="100"
-  >
-    <rect 
-      class="indicator-background" 
-      x="0" 
-      y="0" 
-      width="58" 
-      height="100"
-    ></rect>
-    <rect 
-      class="indicator-fill" 
-      x="0" 
-      y="100" 
-      width="58" 
-      height="0"
-    ></rect>
-    <line 
-      class="middle-line" 
-      x1="0" 
-      x2="58" 
-      y1="50" 
-      y2="50"
-    ></line>
-  </svg>
-
   <script>
     // Indicator value
-    let averageSpeedValue = 37;
+    const averageSpeedValue = 37;
+    const diagramTitle = 'Average speed';
 
-    const indicatorFill = d3.select('.indicator-fill');
-
+    // Diagram params
+    const svgWidth = 58;
+    const svgHeight = 100;
     const maxHeight = 100;
     const duration = 1000;
 
+    const body = d3.select('body');
+
+    const diagramContainer = body.append('div')
+      .attr('class', 'diagram-container');
+
+    const diagramText = diagramContainer.append('div')
+      .attr('class', 'diagram-text')
+      .style('display', 'flex')
+      .style('align-items', 'baseline')
+      .style('gap', '4px');
+
+    diagramText.append('div')
+      .attr('class', 'diagram-value')
+      .text(averageSpeedValue);
+
+    diagramText.append('div')
+      .attr('class', 'diagram-unit')
+      .text('km/h');
+
+    diagramContainer.append('div')
+      .attr('class', 'diagram-label')
+      .text(diagramTitle);
+
+    // Indicator
+    const svg = body.append('svg')
+      .attr('class', 'diagram-indicator')
+      .attr('width', svgWidth)
+      .attr('height', svgHeight);
+
+    // Background
+    svg.append('rect')
+      .attr('class', 'indicator-background')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('width', svgWidth)
+      .attr('height', svgHeight)
+      .attr('rx', 5)
+      .attr('ry', 5);
+
+    // Indicator fill
+    const indicatorFill = svg.append('rect')
+      .attr('class', 'indicator-fill')
+      .attr('x', 0)
+      .attr('y', svgHeight)
+      .attr('width', svgWidth)
+      .attr('height', 0)
+      .attr('rx', 0)
+      .attr('ry', 5);
+
+    // Line middle
+    svg.append('line')
+      .attr('class', 'middle-line')
+      .attr('x1', 0)
+      .attr('x2', svgWidth)
+      .attr('y1', svgHeight / 2)
+      .attr('y2', svgHeight / 2);
+
+    // Animation
     indicatorFill
       .transition()
       .duration(duration)
-      .attr('height', (averageSpeedValue / 100) * maxHeight)
-      .attr('y', maxHeight - (averageSpeedValue / 100) * maxHeight);
-
-    document.querySelector('.diagram-value').textContent = averageSpeedValue;
-
+      .attr('height', (averageSpeedValue / 100) * svgHeight)
+      .attr('y', svgHeight - (averageSpeedValue / 100) * svgHeight);
   </script>
 </body>
 </html>
