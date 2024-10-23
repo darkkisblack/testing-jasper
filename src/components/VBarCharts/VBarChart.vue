@@ -7,10 +7,61 @@
       </div>
       <div class="diagram-label">Average speed</div>
     </div>
-    <svg ref="diagramSvg" class="diagram-indicator" width="58" height="100">
-      <rect class="indicator-background" x="0" y="0" width="58" height="100"></rect>
-      <rect ref="indicatorFill" class="indicator-fill" x="0" y="100" width="58" height="0"></rect>
-      <line class="middle-line" x1="0" x2="58" y1="50" y2="50"></line>
+    <svg 
+      ref="diagramSvg" 
+      class="diagram-indicator" 
+      width="58" 
+      height="100"
+      filter="url(#shadow)"
+    >
+      <filter 
+        id="shadow" 
+        x="-50%" 
+        y="-50%" 
+        width="200%" 
+        height="200%"
+      >
+        <feDropShadow 
+          dx="0" 
+          dy="10" 
+          stdDeviation="5" 
+          flood-color="rgba(62, 200, 150, 0.14)"
+        />
+        <feDropShadow 
+          dx="0" 
+          dy="20" 
+          stdDeviation="10" 
+          flood-color="rgba(62, 200, 117, 0.12)"
+        />
+        <feDropShadow 
+          dx="0" 
+          dy="30" 
+          stdDeviation="15" 
+          flood-color="rgba(62, 200, 167, 0.10)"
+        />
+      </filter>
+      <rect 
+        class="indicator-background" 
+        x="0" 
+        y="0" 
+        width="58" 
+        height="100"
+      ></rect>
+      <rect 
+        ref="indicatorFill" 
+        class="indicator-fill" 
+        x="0" 
+        y="100" 
+        width="58" 
+        height="0"
+      ></rect>
+      <line 
+        class="middle-line" 
+        x1="0" 
+        x2="58" 
+        y1="50" 
+        y2="50"
+      ></line>
     </svg>
   </div>
 
@@ -50,6 +101,7 @@
   background-color: #1C232E;
   font-family: "Golos Text", sans-serif;
   display: flex;
+  padding: 54px 24px;
   gap: 12px;
 }
 
@@ -60,6 +112,7 @@
   gap: 4px;
   flex: 1 0 0;
   align-self: stretch;
+  height: 100px;
 }
 
 .diagram-text {
