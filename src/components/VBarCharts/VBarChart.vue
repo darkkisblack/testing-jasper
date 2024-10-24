@@ -12,7 +12,8 @@
       class="diagram-indicator" 
       width="58" 
       height="100"
-      filter="url(#shadow)"
+      viewBox="0 0 58 100"
+      
     >
       <filter 
         id="shadow" 
@@ -157,6 +158,7 @@
 
 .diagram-indicator {
   border-radius: 5px;
+  overflow: visible;
 }
 
 .indicator-background {
@@ -170,6 +172,11 @@
   /* Indicator color */
   rx: 0;
   ry: 5;
+  filter: drop-shadow(0px 10px 10px rgba(62, 200, 150, 0.14)) 
+          drop-shadow(0px 20px 20px rgba(62, 200, 117, 0.12)) 
+          drop-shadow(0px 30px 30px rgba(62, 200, 167, 0.10)) 
+          drop-shadow(0px 40px 40px rgba(62, 200, 167, 0.08)) 
+          drop-shadow(0px 50px 50px rgba(62, 200, 159, 0.05));
 }
 
 .middle-line {
